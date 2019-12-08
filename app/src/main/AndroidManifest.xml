@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ConfirmActivity"></activity>
-        <receiver android:name=".MyReceiver"/>
-        <service android:name=".Music"
-            android:enabled="true"/>
+        <activity android:name=".ConfirmActivity" />
+
+        <receiver android:name=".MyReceiver" />
+
+        <service
+            android:name=".Music"
+            android:enabled="true" />
     </application>
 
 </manifest>

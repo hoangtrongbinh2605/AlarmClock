@@ -8,11 +8,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.UUID;
 
-public class ConfirmActivity extends MainActivity {
-    TextView tv1;
-    EditText edt2;
+public class ConfirmActivity extends AppCompatActivity {
+    TextView tv;
+    EditText edt;
     Button btnOff;
     String id;
 
@@ -22,16 +24,16 @@ public class ConfirmActivity extends MainActivity {
         setContentView(R.layout.activity_confirm);
         final Intent intent = new Intent(ConfirmActivity.this, MyReceiver.class);
 
-        tv1 = (TextView) findViewById(R.id.tv1);
-        edt2 = (EditText)findViewById(R.id.edt2);
+        tv = (TextView) findViewById(R.id.tv1);
+        edt = (EditText)findViewById(R.id.edt2);
         btnOff = (Button)findViewById(R.id.btnOff);
 
-        tv1.setText(id = UUID.randomUUID().toString());
+        tv.setText(id = UUID.randomUUID().toString());
 
         btnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edt2.getText().toString().equals(tv1.getText().toString())) {
+                if (edt.getText().toString().equals(tv.getText().toString())) {
                     Toast.makeText(getApplicationContext(),"Correct",Toast.LENGTH_LONG).show();
                     intent.putExtra("extra","off");
                     sendBroadcast(intent);

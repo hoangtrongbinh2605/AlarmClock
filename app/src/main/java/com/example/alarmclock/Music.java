@@ -4,12 +4,14 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
-import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 
 public class Music extends Service {
     MediaPlayer mediaPlayer;
     int id;
+    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -17,7 +19,6 @@ public class Music extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.e("Music","zz");
         String nhankey = intent.getExtras().getString("extra");
         if(nhankey.equals("on")){
             id = 1;
@@ -26,8 +27,8 @@ public class Music extends Service {
         }
         if(id == 1){
             mediaPlayer = MediaPlayer.create(this,R.raw.morning_flower);
+            mediaPlayer.setLooping(true);
             mediaPlayer.start();
-            id = 0;
         }else if(id ==0){
             mediaPlayer.stop();
             mediaPlayer.reset();

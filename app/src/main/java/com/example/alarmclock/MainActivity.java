@@ -55,17 +55,25 @@ public class MainActivity extends AppCompatActivity {
                         string_min = "0" + String.valueOf(min);
                     }
 
+                    long time = calendar.getTimeInMillis() - (calendar.getTimeInMillis()%60000);
+                    if(System.currentTimeMillis()>time){
+                        if(Calendar.AM_PM == 0){
+                            time = time / (1000 * 60 *60 *12);
+                        }
+                        else{
+                            time = time / (1000 * 60 * 60 *24);
+                        }
+                    }
+
                     intent.putExtra("extra","on");
                     pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-                    alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingIntent);
+//                    alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingIntent);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP,time,pendingIntent);
                     txtTime.setText("Giờ bạn đặt là: " + string_hour + ":" + string_min);
                     Toast.makeText(MainActivity.this,"Alarm is ON", Toast.LENGTH_SHORT).show();
                 }
                 else{
-//                    alarmManager.cancel(pendingIntent);
-//                    Toast.makeText(MainActivity.this,"Alarm is OFF",Toast.LENGTH_SHORT).show();
-//                    intent.putExtra("extra","off");
-//                    sendBroadcast(intent);
+
                     Intent mh2 = new Intent(MainActivity.this, ConfirmActivity.class);
                     startActivity(mh2);
                 }
