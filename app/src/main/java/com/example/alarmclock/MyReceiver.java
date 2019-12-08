@@ -3,22 +3,15 @@ package com.example.alarmclock;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
+import android.util.Log;
 
 public class MyReceiver extends BroadcastReceiver {
-
     @Override
     public void onReceive(Context context, Intent intent) {
-        Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        if(alarmUri == null){
-            alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        }
-
-        Ringtone ringtone = RingtoneManager.getRingtone(context,alarmUri);
-        ringtone.play();
+        Log.e("receive","hello");
+        String chuoi_string = intent.getExtras().getString("extra");
+        Intent myIntent = new Intent (context,Music.class);
+        myIntent.putExtra("extra",chuoi_string);
+        context.startService(myIntent);
     }
-
-
 }
